@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+<xacro:macro name="planar_joint" params="parent_link child_link link_length lower_limit upper_limit">
+
+<joint name="${parent_link}_to_${child_link}" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="${lower_limit}" upper="${upper_limit}" velocity="0.5"/>
+    <parent link="${parent_link}"/>
+    <child link="${child_link}"/>
+    <origin xyz="${link_length} 0 0"/>
+</joint>
+
+</xacro:macro>
+</robot>

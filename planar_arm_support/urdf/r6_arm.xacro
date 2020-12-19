@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<robot name="r6_arm" xmlns:xacro="http://wiki.ros.org/xacro">
+
+<xacro:include filename="$(find planar_arm_support)/urdf/planar_link_macro.xacro" />
+<xacro:include filename="$(find planar_arm_support)/urdf/planar_joint_macro.xacro" />
+
+<xacro:property name="link_length" value="1.0" />
+<xacro:property name="joint_limits" value="${pi / 2}" />
+
+  <material name="blue">
+      <color rgba="0 0 0.8 1.0"/>
+  </material>
+
+  <material name="green">
+      <color rgba="0 0.8 0 1.0"/>
+  </material>
+
+  <link name="world" />
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.2 0.2 0.02"/>
+      </geometry>
+      <origin xyz="0 0 -0.01"/>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <xacro:planar_link name="link_1" length="${link_length}" width="0.1" geom_z_offset="0.05" />
+  <xacro:planar_link name="link_2" length="${link_length}" width="0.1" geom_z_offset="-0.05" />
+  <xacro:planar_link name="link_3" length="${link_length}" width="0.1" geom_z_offset="0.05" />
+  <xacro:planar_link name="link_4" length="${link_length}" width="0.1" geom_z_offset="-0.05" />
+  <xacro:planar_link name="link_5" length="${link_length}" width="0.1" geom_z_offset="0.05" />
+  <xacro:planar_link name="link_6" length="${link_length}" width="0.1" geom_z_offset="-0.05" />
+
+<link name="flange" />
+
+<link name="tool">
+    <visual>
+      <geometry>
+        <box size="0.1 0.05 0.05"/>
+      </geometry>
+      <origin xyz="0.05 0 0"/>
+      <material name="green"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.05 0.05"/>
+      </geometry>
+      <origin xyz="0.05 0 0"/>
+    </collision>
+  </link>
+
+<link name="tool0" />
+
+<joint name="world_to_base_link" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+</joint>
+
+<joint name="base_link_link_1" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="-${joint_limits}" upper="${joint_limits}" velocity="0.5"/>
+    <parent link="base_link"/>
+    <child link="link_1"/>
+    <origin xyz="0 0 0"/>
+</joint>
+
+<xacro:planar_joint parent_link="link_1" child_link="link_2" link_length="${link_length}" lower_limit="-${joint_limits}" upper_limit="${joint_limits}"/>
+<xacro:planar_joint parent_link="link_2" child_link="link_3" link_length="${link_length}" lower_limit="-${joint_limits}" upper_limit="${joint_limits}"/>
+<xacro:planar_joint parent_link="link_3" child_link="link_4" link_length="${link_length}" lower_limit="-${joint_limits}" upper_limit="${joint_limits}"/>
+<xacro:planar_joint parent_link="link_4" child_link="link_5" link_length="${link_length}" lower_limit="-${joint_limits}" upper_limit="${joint_limits}"/>
+<xacro:planar_joint parent_link="link_5" child_link="link_6" link_length="${link_length}" lower_limit="-${joint_limits}" upper_limit="${joint_limits}"/>
+
+
+<joint name="link_6_to_flange" type="fixed">
+    <parent link="link_6"/>
+    <child link="flange"/>
+    <origin xyz="${link_length} 0 0"/>
+</joint>
+
+<joint name="flange_to_tool" type="fixed">
+    <parent link="flange"/>
+    <child link="tool"/>
+</joint>
+
+<joint name="tool_to_tool0" type="fixed">
+    <parent link="tool"/>
+    <child link="tool0"/>
+    <origin xyz="0.1 0 0"/>
+</joint>
+
+</robot>

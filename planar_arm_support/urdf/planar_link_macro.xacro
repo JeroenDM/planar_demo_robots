@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+<xacro:macro name="planar_link" params="name length width geom_z_offset">
+
+<link name="${name}">
+    <visual>
+      <geometry>
+        <box size="${length} ${width} ${width}"/>
+      </geometry>
+      <origin xyz="${length / 2} 0 ${geom_z_offset}"/>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${length} ${width} ${width}"/>
+      </geometry>
+      <origin xyz="${length / 2} 0 ${geom_z_offset}"/>
+    </collision>
+  </link>
+
+</xacro:macro>
+</robot>
