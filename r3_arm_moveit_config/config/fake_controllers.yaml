@@ -1,0 +1,9 @@
+controller_list:
+  - name: fake_manipulator_controller
+    joints:
+      - base_link_link_1
+      - link_1_link_2
+      - link_2_link_3
+initial:  # Define initial robot poses.
+  - group: manipulator
+    pose: allZeros
