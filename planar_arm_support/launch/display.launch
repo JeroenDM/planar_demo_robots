@@ -1,6 +1,6 @@
 <launch>
 
-  <arg name="model" default="$(find planar_arm_support)/urdf/r8_arm.xacro"/>
+  <arg name="model" default="$(find planar_arm_support)/urdf/p2r3_arm.xacro"/>
   <arg name="gui" default="true" />
   <arg name="rvizconfig" default="$(find planar_arm_support)/config/config.rviz" />
 
