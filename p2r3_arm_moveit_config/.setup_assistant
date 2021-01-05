@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: planar_arm_support
+    relative_path: urdf/p2r3_arm.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/r6_arm.srdf
+  CONFIG:
+    author_name: Jeroen De Maeyer
+    author_email: jeroen.demaeyer@kuleuven.be
+    generated_timestamp: 1609864390
